@@ -88,7 +88,7 @@ class Autoscaler(bgThread):
             self.scale_up(cur - procs)
             return True
         elif cur < procs:
-            self.scale_down((procs - cur) - self.min_concurrency)
+            self.scale_down(max(0, (procs - cur) - self.min_concurrency))
             return True
 
     def maybe_scale(self, req=None):
